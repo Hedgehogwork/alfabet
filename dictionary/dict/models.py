@@ -100,4 +100,4 @@ class lang_pair_ru_en(models.Model):
     second_discr  = models.CharField(max_length=200)
     first_e  = models.CharField(max_length=200)
     second_e  = models.CharField(max_length=200)
-    active = model_langs.IntegerField(max_length=200)
+    active = models.IntegerField(max_length=200)
