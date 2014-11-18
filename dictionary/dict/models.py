@@ -101,3 +101,32 @@ class lang_pair_ru_en(models.Model):
     first_e  = models.CharField(max_length=200)
     second_e  = models.CharField(max_length=200)
     active = models.IntegerField(max_length=200)
+
+class lang_pair_ru_de(models.Model):
+    # id = models.AuoField(primary_key=True)
+    first_lang = models.CharField(max_length=300)
+    second_char = models.CharField(max_length=300)
+    first_discr  = models.CharField(max_length=200)
+    second_discr  = models.CharField(max_length=200)
+    first_e  = models.CharField(max_length=200)
+    second_e  = models.CharField(max_length=200)
+    active = models.IntegerField(max_length=200)
+
+class lang_pair_en_de(models.Model):
+    # id = models.AuoField(primary_key=True)
+    first_lang = models.CharField(max_length=300)
+    second_char = models.CharField(max_length=300)
+    first_discr  = models.CharField(max_length=200)
+    second_discr  = models.CharField(max_length=200)
+    first_e  = models.CharField(max_length=200)
+    second_e  = models.CharField(max_length=200)
+    active = models.IntegerField(max_length=200)
+
+class gramma(models.Model):
+    # id = models.AuoField(primary_key=True)
+    role = models.CharField(max_length=50)
+    chast_rechi = models.CharField(max_length=50)
+    pole1 = models.CharField(max_length=100)
+    pole2 = models.CharField(max_length=100)
+    pole3 = models.CharField(max_length=100)
+    pole4 = models.CharField(max_length=100)
