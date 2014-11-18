@@ -1,3 +1,4 @@
 from django.contrib import admin
+from dict.models import simbol
 
-# Register your models here.
+admin.site.register(Poll)
