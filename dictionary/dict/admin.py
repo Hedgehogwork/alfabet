@@ -1,4 +1,4 @@
 from django.contrib import admin
 from dict.models import simbol
 
-admin.site.register(Poll)
+admin.site.register(simbol)
