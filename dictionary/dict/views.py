@@ -9,5 +9,5 @@ from django import forms
 # Create your views here.
 def home(request):
     gets = 00000
-    return render(request, 'upload_alfabet.html',
+    return render(request, 'index.html',
                                {'gets': gets, })
