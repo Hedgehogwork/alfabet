@@ -13,7 +13,7 @@ class simbol(models.Model):
     pole2 = models.CharField(max_length=200)
     pole3 = models.CharField(max_length=200)
 
-class oboznach(models.Model):
+class Oboznach(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField(max_length=200)
     lang = models.CharField(max_length=2)
@@ -27,7 +27,7 @@ class oboznach(models.Model):
     pole3 = models.CharField(max_length=100)
     pole4 = models.CharField(max_length=100)
 
-class des_ru(models.Model):
+class Des_ru(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField(max_length=200)
     lang = models.CharField(max_length=2)

@@ -12,8 +12,10 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from uploadapp.form import *
+from dict.models import simbol, Oboznach, Des_ru
 import codecs
 # Create your views here.
+# from dictionary.dict.models import Oboznach
 
 
 class UploadAlfabet(View):
@@ -34,23 +36,41 @@ class UploadAlfabet(View):
         form = UploadFileForm()
         file = settings.STATIC_URL+""
         f = codecs.open("/home/semyon/myProject/alfabet/dictionary/static/en_ru_d.txt", "r", encoding='utf-8')
-        # f = codecs.open('unicode.rst', encoding='utf-8')
+
         # models.oboznach - модель со словами
         tests = """£.s.d. <br>[͵elesʹdi:] <i>n (сокр. от лат. librae, solidi, denarii)</i> <br>1) фунты стерлингов, шиллинги и пенсы <br>2) <i>разг. </i>деньги, богатство <br>to be short of L.s.d. - сидеть без денег <br>a question /a matter/ of L.s.d. - вопрос в деньгах"""
-        # tests = """accroach <br>[əʹkrəʋtʃ] <i>v редк.</i> <br>присваивать, узурпировать, незаконно захватывать  """
         d = []
-        # prog = re.compile("<br>")
         sss = re.match("<br>",unicode(tests, 'utf-8'))
         s = re.split('<br>',unicode(tests, 'utf8', errors='ignore'))
         slovo = s[0].encode('utf8')
         kol = len(s)
         znach = s[2:kol]
-        # znach = filter(lambda x:x.encode('utf8'), znach)
-        # znach = lambda znach:znach.encode('utf8')
         znach = [x.encode('utf8') for x in znach]
+
+        def errase(x):
+            chars = ['1)', '1.','2)', '2.','3)', '3.','4)', '4.','5)', '5.',]
+            x = re.sub('[%s]' % ''.join(chars), '', x)
+            return x
+
+        znach = [errase(x) for x in znach]
+
         tmp = re.split('<i>',s[1])
         transkrip = tmp[0].encode('utf8')
-        udar = re.findall('[ʹ](em|kju:|eks|bi:|ef|ʤei|en|a:|vi:|ci:|ʤi:|kei|es|dablju:|zed|di:|eiʧ|el|pi:|ti:)', transkrip)
+        l_transkrip = len(transkrip)
+        # udar = re.findall('[ʹ](em|kju:|eks|bi:|ef|ʤei|en|a:|vi:|ci:|ʤi:|kei|es|dablju:|zed|di:|eiʧ|el|pi:|ti:)', transkrip)
+
+        def find(strng, ch):
+            index = 0
+            while index < len(strng):
+                if strng[index] == ch:
+                    return index
+                index += 1
+            return -1
+        n_udar = find(transkrip,'ʹ')
+        if transkrip[n_udar+1] in ['k','b','d','p','t']:
+            n_udar += 1
+
+
 
         pattern = 'n(.+)</i>'
         try:
@@ -78,7 +98,18 @@ class UploadAlfabet(View):
         else:
             chast_rechi = '-'
 
+            # Des_ru
 
+
+        rec = Oboznach(text=slovo, lang='ru',font='лат.',transkrip=transkrip,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
+        rec.save()
+        ttt = Des_ru.objects.order_by('text')
+        for x in znach:
+            if znach in ttt:
+                pass
+            else:
+                recznach = Des_ru(text=znach[0], lang='ru',)
+                recznach.save()
 
         id = 0
         # for line in f:
