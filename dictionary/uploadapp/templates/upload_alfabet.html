@@ -15,11 +15,25 @@
     {{ form.file }}
     <input type="submit">
 </form>
-
+{#{{ s|pprint }}#}
 {% comment %}
 {% for line in f %}
     {{ line }}<br><br>
 {% endfor %}
 {% endcomment %}
+слово: {{ slovo }}<br>
+транскрипция: {{ transkrip }}<br>
+часть речи: {{ chast_rechi }}<br><br>
+Использование: {{ used }}<br><br>
+Значение: {{ znach|pprint }}<br><br>
+udar: {{ udar }}<br><br>
+
+
+{{ s|pprint }}
+{% for line in sssss %}
+    {{ line.str }}<br><br>
+{% endfor %}
+
+
 </body>
 </html>

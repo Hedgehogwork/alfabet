@@ -27,6 +27,20 @@ class oboznach(models.Model):
     pole3 = models.CharField(max_length=100)
     pole4 = models.CharField(max_length=100)
 
+class des_ru(models.Model):
+    id = models.AutoField(primary_key=True)
+    text = models.TextField(max_length=200)
+    lang = models.CharField(max_length=2)
+    font = models.CharField(max_length=3)
+    transkrip = models.CharField(max_length=200)
+    udaren = models.IntegerField(max_length=200)
+    chast_rechi = models.CharField(max_length=50)
+    used = models.CharField(max_length=200)
+    pole1 = models.CharField(max_length=100)
+    pole2 = models.CharField(max_length=100)
+    pole3 = models.CharField(max_length=100)
+    pole4 = models.CharField(max_length=100)
+
 class memi(models.Model):
     id = models.AutoField(primary_key=True)
     img = models.CharField(max_length=300)
