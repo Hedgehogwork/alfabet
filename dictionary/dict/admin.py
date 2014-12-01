@@ -1,6 +1,6 @@
 from django.contrib import admin
-from dict.models import simbol, Oboznach, Des_ru
+from dict.models import simbol, Oboznach, Dess_ru
 
 admin.site.register(simbol)
 admin.site.register(Oboznach)
-admin.site.register(Des_ru)
+admin.site.register(Dess_ru)
