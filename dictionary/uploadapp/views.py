@@ -37,16 +37,17 @@ class UploadAlfabet(View):
         # f = codecs.open('unicode.rst', encoding='utf-8')
         # models.oboznach - модель со словами
         tests = """£.s.d. <br>[͵elesʹdi:] <i>n (сокр. от лат. librae, solidi, denarii)</i> <br>1) фунты стерлингов, шиллинги и пенсы <br>2) <i>разг. </i>деньги, богатство <br>to be short of L.s.d. - сидеть без денег <br>a question /a matter/ of L.s.d. - вопрос в деньгах"""
-        tests = """accroach <br>[əʹkrəʋtʃ] <i>v редк.</i> <br>присваивать, узурпировать, незаконно захватывать  """
+        # tests = """accroach <br>[əʹkrəʋtʃ] <i>v редк.</i> <br>присваивать, узурпировать, незаконно захватывать  """
         d = []
         # prog = re.compile("<br>")
         sss = re.match("<br>",unicode(tests, 'utf-8'))
         s = re.split('<br>',unicode(tests, 'utf-8', errors='ignore'))
-        s = re.split('<br>',unicode(tests, 'utf-8', errors='ignore'))
         slovo = s[0].encode('utf8')
         kol = len(s)
         znach = s[2:kol]
-        znach = filter(lambda x:x.encode('utf8'), znach)
+        # znach = filter(lambda x:x.encode('utf8'), znach)
+        # znach = lambda znach:znach.encode('utf8')
+        znach = [x.encode('utf-8') for x in znach]
         tmp = re.split('<i>',s[1])
         transkrip = tmp[0].encode('utf8')
         udar = re.findall('[ʹ](em|kju:|eks|bi:|ef|ʤei|en|a:|vi:|ci:|ʤi:|kei|es|dablju:|zed|di:|eiʧ|el|pi:|ti:)', transkrip)
