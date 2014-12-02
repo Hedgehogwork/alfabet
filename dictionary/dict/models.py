@@ -31,11 +31,13 @@ class Dess_ru(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField(max_length=200)
     lang = models.CharField(max_length=2)
+    sz = models.ForeignKey(Oboznach, null=True, blank=True)
 
 class Des_ru(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.TextField(max_length=200)
     lang = models.CharField(max_length=2)
+    sz = models.ForeignKey(Oboznach, null=True, blank=True)
     # font = models.CharField(max_length=3)
     # transkrip = models.CharField(max_length=200)
     # udaren = models.IntegerField(max_length=200)

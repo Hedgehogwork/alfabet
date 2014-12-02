@@ -65,11 +65,13 @@ class UploadAlfabet(View):
                 while index < len(strng):
                     if strng[index] == ch:
                         return index
-                    index += 1
+                    index = index + 1
                 return -1
-            n_udar = find(transkrip,'ʹ')
-            if transkrip[n_udar+1] in ['k','b','d','p','t']:
-                n_udar += 1
+
+            n_udar = find(transkrip, 'ʹ')
+
+            if transkrip[n_udar+1] in ['k', 'b', 'd', 'p', 't'] and n_udar != -1:
+                n_udar = n_udar + 2
 
 
 
@@ -109,14 +111,27 @@ class UploadAlfabet(View):
 
             rec = Oboznach(text=slovo, lang='ru',font='лат.',transkrip=transkrip,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
             rec.save()
-            ttt = Dess_ru.objects.all()
+            # entry = Oboznach.objects.get(id=1)
+            # ttt = Des_ru.objects.get(text='text')
+
 
             for x in znach:
-                if x in ttt:
-                    pass
-                else:
+                try:
+                    p = Dess_ru.objects.get(text=x)
+                except Dess_ru.DoesNotExist:
+                    # print "Apress isn't in the database yet."
                     recznach = Dess_ru(text=x, lang='ru',)
                     recznach.save()
+                # else:
+                #     # print "Apress is in the database."
+                #     recznach = Dess_ru(text=x, lang='ru',)
+
+
+                # if x in ttt:
+                #     pass
+                # else:
+                #     recznach = Dess_ru(text=x, lang='ru',)
+                #     recznach.save()
 
         id = 0
         # for line in f:
