@@ -68,7 +68,7 @@ class UploadAlfabet(View):
                     index = index + 1
                 return -1
 
-            n_udar = find(transkrip, 'ʹ')
+            n_udar = find(transkrip, '\xcd')
 
             if transkrip[n_udar+1] in ['k', 'b', 'd', 'p', 't'] and n_udar != -1:
                 n_udar = n_udar + 2
