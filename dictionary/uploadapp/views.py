@@ -108,9 +108,12 @@ class UploadAlfabet(View):
 
                 # Des_ru
 
+            try:
+                rec = Oboznach.objects.get(text=slovo)
+            except Dess_ru.DoesNotExist:
+                rec = Oboznach(text=slovo, lang='ru',font='лат.',transkrip=transkrip,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
+                rec.save()
 
-            rec = Oboznach(text=slovo, lang='ru',font='лат.',transkrip=transkrip,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
-            rec.save()
             # entry = Oboznach.objects.get(id=1)
             # ttt = Des_ru.objects.get(text='text')
 
