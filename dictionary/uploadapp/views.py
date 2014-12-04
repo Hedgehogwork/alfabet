@@ -56,6 +56,7 @@ class UploadAlfabet(View):
             znach = [errase(x) for x in znach]
 
             tmp = re.split('<i>',s[1])
+
             transkrip = tmp[0].encode('utf8')
             l_transkrip = len(transkrip)
             # udar = re.findall('[ʹ](em|kju:|eks|bi:|ef|ʤei|en|a:|vi:|ci:|ʤi:|kei|es|dablju:|zed|di:|eiʧ|el|pi:|ti:)', transkrip)
@@ -110,7 +111,7 @@ class UploadAlfabet(View):
 
             try:
                 rec = Oboznach.objects.get(text=slovo)
-            except Dess_ru.DoesNotExist:
+            except Oboznach.DoesNotExist:
                 rec = Oboznach(text=slovo, lang='ru',font='лат.',transkrip=transkrip,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
                 rec.save()
 
