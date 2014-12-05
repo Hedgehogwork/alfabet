@@ -70,7 +70,8 @@ class UploadAlfabet(View):
                 return -1
 
             n_udar = find(transkrip, '\xcd')
-
+            # m = re.search('(?<=abc)def', 'abcdef')
+            # m.group(0)
             if transkrip[n_udar+1] in ['k', 'b', 'd', 'p', 't'] and n_udar != -1:
                 n_udar = n_udar + 2
 
@@ -124,7 +125,7 @@ class UploadAlfabet(View):
                     p = Dess_ru.objects.get(text=x)
                 except Dess_ru.DoesNotExist:
                     # print "Apress isn't in the database yet."
-                    recznach = Dess_ru(text=x, lang='ru',)
+                    recznach = Dess_ru(text=x, lang='ru',sz=rec)
                     recznach.save()
                 # else:
                 #     # print "Apress is in the database."
