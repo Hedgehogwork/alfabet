@@ -168,6 +168,7 @@ CMS_LANGUAGES = {
 CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),
+    ('chat.html', 'Chat'),
     ('feature.html', 'Page with Feature')
 )
 
