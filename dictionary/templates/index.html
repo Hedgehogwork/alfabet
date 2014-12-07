@@ -1,11 +1,24 @@
-{% load cms_tags sekizai_tags %}
+{% load cms_tags sekizai_tags menu_tags staticfiles %}
 <html>
   <head>
+{% comment %}
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+	<script src="{% static "cms/js/libs/jquery.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "cms/js/modules/cms.base.js" %}" type="text/javascript"></script>
+
+{% endcomment %}
+
+
       {% render_block "css" %}
   </head>
   <body>
-      {% placeholder base_content %}
-      {% block base_content%}{% endblock %}
+{#      {% placeholder base_content %}#}
+      {% block base_content%}
+
+
+
+      {% endblock %}
       CMS!!!!!!
       {% render_block "js" %}
   </body>

@@ -36,15 +36,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'south',
     'uploadapp',
-    'sekizai',
-    'html5lib',
     'dict',
+    'html5lib',
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a modified pre-order traversal tree
     'menus',  # helper for model independent hierarchical website navigation
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list before 'django.contrib.admin'.
+    'south',  # intelligent schema and data migrations
+    'sekizai',  # for javascript and css management
+    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,8 +59,15 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
+    # 'cms.middleware.toolbar.toolbar_plugin_processor',
 )
 ROOT_URLCONF = 'dictionary.urls'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 
 WSGI_APPLICATION = 'dictionary.wsgi.application'
 
@@ -86,15 +93,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
 )
 
-STATIC_ROOT = os.path.join(PROJECT_PATH, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
+
 ADMIN_MEDIA_PREFIX = "/static/admin/"
 
-MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 CMS_TEMPLATES = (
-    # ('template_1.html', 'Template One'),
+    ('main.html', 'Index'),
+    ('chat.html', 'Chat'),
     # ('template_2.html', 'Template Two'),
 )
 
@@ -129,4 +138,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
+
