@@ -169,6 +169,9 @@ CMS_TEMPLATES = (
     ## Customize this
     ('page.html', 'Page'),
     ('chat.html', 'Chat'),
+    ('blocknot.html', 'blocknot'),
+    ('users.html', 'users'),
+    ('dictionary.html', 'dictionary'),
     ('feature.html', 'Page with Feature')
 )
 
