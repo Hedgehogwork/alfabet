@@ -58,20 +58,35 @@ class UploadAlfabet(View):
                 # ищем первый </i>
                 regex = re.compile("(^.*?</i>)")
                 r = regex.match(line)
+                # если li есть режем по нему
                 if r:
                     tmp_s = re.split('(^.*?</i>)', line)
+                else:
+                    # если нет то режим по скобке
+                    tmp_s = re.split('(^.*?\])', line)
+                v_ru1 = tmp_s[2]
             except:
-                pass
+                # если нет то пусто
+                v_ru1 = ''
+
+            try:
+                v_ru2 = re.split('(\d[\.]|\d[)])', v_ru1)
+                pp = re.compile('(<br>)')
+                [pp.sub("", x) for x in v_ru2]
+            except:
+                v_ru2 = ''
+
 
             # получае все что после него
+
             # v_ru1 = r[2]
 
 
 
             # отсекаем значение из строки они все идут после 2-го br
-            kol = len(s)
-            v_ru1 = s[2:kol]
-            v_ru1 = [x.encode('utf8') for x in v_ru1]
+            # kol = len(s)
+            # v_ru1 = s[2:kol]
+            # v_ru1 = [x.encode('utf8') for x in v_ru1]
 
             # чистим значения от цифр со скобками и без
             # def errase(x):
@@ -82,8 +97,8 @@ class UploadAlfabet(View):
             #
 
             # чистим значения от цифр со скобками и без
-            pp = re.compile('(\d[\.])')
-            v_ru1 = [pp.sub("", x) for x in v_ru1]
+            # pp = re.compile('(\d[\.])')
+            # v_ru1 = [pp.sub("", x) for x in v_ru1]
 
 
             tmp = re.split('<i>',s[1])
@@ -142,23 +157,23 @@ class UploadAlfabet(View):
                 # Des_ru
 
             #пишем в базу
-            # try:
-            #     rec = Oboznach.objects.get(text=v_en)
-            # except Oboznach.DoesNotExist:
-            #     rec = Oboznach(text=v_en, lang='ru',font='лат.',transkrip=t_en,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
-            #     rec.save()
+            try:
+                rec = Oboznach.objects.get(text=v_en)
+            except Oboznach.DoesNotExist:
+                rec = Oboznach(text=v_en, lang='ru',font='лат.',transkrip=t_en,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
+                rec.save()
 
 
             #пишем в базу
 
-            # for x in v_ru1:
-            #     try:
-            #         p = Dess.objects.get(text=x)
-            #     except Dess.DoesNotExist:
-            #         # print "Apress isn't in the database yet."
-            #         recznach = Dess(text=x, lang='ru',sz=rec)
-            #         recznach.save()
-            #
+            for x in v_ru2:
+                try:
+                    p = Dess.objects.get(text=x)
+                except Dess.DoesNotExist:
+                    # print "Apress isn't in the database yet."
+                    recznach = Dess(text=x, lang='ru',sz=rec)
+                    recznach.save()
+
 
 
 
@@ -186,16 +201,5 @@ class UploadAlfabet(View):
 
         return render(request, 'upload_alfabet.html',
                                {'gets': gets,
-                               # 'form': form,
-                               'f': f,
-                               'd': d,
-                               's': s,
-                               'tests': tests,
-                               'slovo': slovo,
-                               'transkrip': transkrip,
-                               'chast_rechi': chast_rechi,
-                               'used': used,
-                               'znach': znach,
-                               'n_udar': n_udar,
-                                })
+                                    })
 
