@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'djangocms_video',
     'south',
     'reversion',
+    'mysite.uploadapp',
     'mysite'
 )
 

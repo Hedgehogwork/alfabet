@@ -16,7 +16,7 @@ from mysite.models import Simbol, Oboznach, Dess
 import codecs
 # Create your views here.
 # from dictionary.dict.models import Oboznach
-
+import csv
 
 class UploadAlfabet(View):
 
@@ -34,8 +34,8 @@ class UploadAlfabet(View):
     def get(self, request):
         gets = 1
         form = UploadFileForm()
-        file = settings.STATIC_URL+""
-        f = codecs.open("/home/semyon/myProject/alfabet/dictionary/static/en_ru_d.txt", "r", encoding='utf-8')
+        file = settings.STATIC_URL+"obr_angl_slov.txt"
+        f = codecs.open("static/obr_angl_slov.txt", "r", encoding='utf-8')
         # models.oboznach - модель со словами
         # tests = """£.s.d. <br>[͵elesʹdi:] <i>n (сокр. от лат. librae, solidi, denarii)</i> <br>1) фунты стерлингов, шиллинги и пенсы <br>2) <i>разг. </i>деньги, богатство <br>to be short of L.s.d. - сидеть без денег <br>a question /a matter/ of L.s.d. - вопрос в деньгах"""
         for line in f:
@@ -51,6 +51,7 @@ class UploadAlfabet(View):
             try:
                 t_en = p.search(line)
                 t_en = t_en.groups()
+                t_en = t_en[0].encode('utf8')
             except:
                 t_en = "none"
 
@@ -160,7 +161,7 @@ class UploadAlfabet(View):
             try:
                 rec = Oboznach.objects.get(text=v_en)
             except Oboznach.DoesNotExist:
-                rec = Oboznach(text=v_en, lang='ru',font='лат.',transkrip=t_en,udaren=n_udar,chast_rechi=chast_rechi,used=used,)
+                rec = Oboznach(text=v_en, lang='ru',font='лат.',transkrip=t_en, udaren=n_udar,chast_rechi=chast_rechi,used=used,)
                 rec.save()
 
 
@@ -174,8 +175,9 @@ class UploadAlfabet(View):
                     recznach = Dess(text=x, lang='ru',sz=rec)
                     recznach.save()
 
-
-
+            # writer = csv.writer(open("/home/semyon/myProject/media/some.csv", "wb"), delimiter=';', quoting=csv.QUOTE_MINIMAL, \
+            #         quotechar='`', lineterminator='|')
+            # writer.writerows([ [v_en, t_en.encode('utf8')])
 
 
                 # else:
