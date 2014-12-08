@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Загрузка алфавита</title>
+</head>
+<body>
+
+<h1>{{ gets }}</h1>
+
+
+<form method="post">
+    Файл
+    {{ form.file }}
+    <input type="submit">
+</form>
+{#{{ s|pprint }}#}
+{% comment %}
+{% for line in f %}
+    {{ line }}<br><br>
+{% endfor %}
+{% endcomment %}
+слово: {{ slovo }}<br>
+транскрипция: {{ transkrip }}<br>
+часть речи: {{ chast_rechi }}<br><br>
+Использование: {{ used }}<br><br>
+Значение: {{ znach.0 }}<br><br>
+udar: {{ n_udar }}<br><br>
+
+
+{{ s|pprint }}
+{% for line in sssss %}
+    {{ line.str }}<br><br>
+{% endfor %}
+
+
+</body>
+</html>
