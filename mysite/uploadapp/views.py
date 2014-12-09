@@ -61,19 +61,18 @@ class UploadAlfabet(View):
                 r = regex.match(line)
                 # если li есть режем по нему
                 if r:
-                    tmp_s = re.split('(^.*?</i>)', line)
+                    tmp_s = re.split('^.*?</i>', line)
                 else:
                     # если нет то режим по скобке
-                    tmp_s = re.split('(^.*?\])', line)
-                v_ru1 = tmp_s[2]
+                    tmp_s = re.split('^.*?\]', line)
+                v_ru1 = tmp_s[1]
             except:
                 # если нет то пусто
                 v_ru1 = ''
 
             try:
+                # v_ru2_1 = re.split('\d[\.]', v_ru1)
                 v_ru2 = re.split('\d[\.]|\d[)]|<br>', v_ru1)
-                # pp = re.compile('(<br>)')
-                # [pp.sub("", x) for x in v_ru2]
             except:
                 v_ru2 = ''
 
