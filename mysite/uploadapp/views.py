@@ -76,6 +76,8 @@ class UploadAlfabet(View):
             except:
                 v_ru2 = ''
 
+            clean_q = re.compile('<.*?>|(\[.*?\])')
+            v_ru2 = [clean_q.sub("", x) for x in v_ru2]
 
             # получае все что после него
 
@@ -171,9 +173,9 @@ class UploadAlfabet(View):
                     p = Dess.objects.get(text=x)
                 except Dess.DoesNotExist:
                     # print "Apress isn't in the database yet."
-                    # if x != '<br>'
-                    recznach = Dess(text=x, lang='ru',sz=rec)
-                    recznach.save()
+                    if x != '':
+                        recznach = Dess(text=x, lang='ru',sz=rec)
+                        recznach.save()
 
             # writer = csv.writer(open("/home/semyon/myProject/media/some.csv", "wb"), delimiter=';', quoting=csv.QUOTE_MINIMAL, \
             #         quotechar='`', lineterminator='|')
