@@ -173,7 +173,7 @@ class UploadAlfabet(View):
                     p = Dess.objects.get(text=x)
                 except Dess.DoesNotExist:
                     # print "Apress isn't in the database yet."
-                    if x != '':
+                    if x != '' and x !=' ':
                         recznach = Dess(text=x, lang='ru',sz=rec)
                         recznach.save()
 
