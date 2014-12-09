@@ -71,9 +71,9 @@ class UploadAlfabet(View):
                 v_ru1 = ''
 
             try:
-                v_ru2 = re.split('(\d[\.]|\d[)])', v_ru1)
-                pp = re.compile('(<br>)')
-                [pp.sub("", x) for x in v_ru2]
+                v_ru2 = re.split('\d[\.]|\d[)]|<br>', v_ru1)
+                # pp = re.compile('(<br>)')
+                # [pp.sub("", x) for x in v_ru2]
             except:
                 v_ru2 = ''
 
@@ -172,6 +172,7 @@ class UploadAlfabet(View):
                     p = Dess.objects.get(text=x)
                 except Dess.DoesNotExist:
                     # print "Apress isn't in the database yet."
+                    # if x != '<br>'
                     recznach = Dess(text=x, lang='ru',sz=rec)
                     recznach.save()
 
@@ -203,5 +204,27 @@ class UploadAlfabet(View):
 
         return render(request, 'upload_alfabet.html',
                                {'gets': gets,
+                                    })
+
+class AlfabetView(View):
+
+    """
+    This view handles Personal Area login requests.
+    """
+    def post(self, request):
+
+
+
+
+        return render(request, 'show.html',
+                {})
+
+    def get(self, request):
+
+        oboznach = Oboznach.objects.all()
+        dess = Dess.objects.all()
+        return render(request, 'show.html',
+                               {'dess': dess,
+                                'oboznach': oboznach,
                                     })
 
